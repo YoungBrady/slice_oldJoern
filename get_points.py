@@ -521,7 +521,7 @@ def get_funcid_by_linenum_filename(db,linenum,filename):
     
 
 def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
-    pkl_path='/home/SySeVR/code/slice_oldJoern/pkl'
+    pkl_path='/home/lyl/huawei_project/slice_oldJoern/pkl'
     if filetype=='funded':
         f=open('/home/lyl/useful/graph_slice/code/pkl/cwe2file2linenum_%s.pkl'%old_or_new,'rb')
         cwe2file2linenum=pickle.load(f)
@@ -584,13 +584,15 @@ def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
     elif filetype=="insertVul":
         func_ids=set()
         file2func=get_allFuncInfo(db)
-        f=open('./pkl/beginline_dict.pkl','rb')
+        f=open(pkl_path+'/beginline_dict.pkl','rb')
         beginline_dict=pickle.load(f)
         f.close()
         for file in beginline_dict[old_or_new]:
+            # if file.split('/')[0]!='PROJ':
+            #     continue
             fileid=os.path.join(filepath,file)
             if fileid in file2func:
-                for linenum in beginline_dict[old_or_new][fileid]:
+                for linenum in beginline_dict[old_or_new][file]:
                     funcid=get_funcidbyloc(linenum,file2func[fileid])
                     func_ids.add(funcid)
 
@@ -640,10 +642,10 @@ if __name__ == '__main__':
     filepath=sys.argv[1]
     filetype=sys.argv[2]
     new_or_old=sys.argv[3]
-    # filepath='/home/lyl/huawei_project/NVD/CWE-119/merge/0/ffmpegCVE-2011-3929/new'
-    # filetype='NVD'
+    # filepath='/home/lyl/huawei_project/insertVul/old'
+    # filetype='insertVul'
     # new_or_old='new'
-
+    print(filepath,filetype,new_or_old)
     funcids=get_funcid_by_filepath(j,filepath,filetype,new_or_old)
     # _dict = get_all_pointer_assignment(j)
     _dict = get_all_pointer(j,funcids)

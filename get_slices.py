@@ -687,15 +687,15 @@ def type_slice(type,j,cnt):
     f.close()
     # cnt = 0
     hashList = []
-    i=0
-    len1=len(edit_points)
+    i=1
     for fileID in edit_points.keys():
-        
+        # print('\n')
         # slice_type = 0#api切片仅往上切
+        len1=len(edit_points[fileID])
         testID = fileID.split('/')[-2]
         for func_info in edit_points[fileID]:
             print('\r',end='')
-            print('slice %s:'%type,i,'/',len1,end=' ')
+            print('slice %s:'%type,i,'/',len1,end='')
             i+=1
 
             funcID = func_info.split('-')[0]
@@ -762,12 +762,13 @@ def type_slice(type,j,cnt):
                             list_edge.append((edge.source_vertex['name'],edge.target_vertex['name']))
                         get_slice_file_sequence(slice_store_filepath, edges_store_filepath, graph.vs(), list_edge, cnt,
                                                 func_name, startline1, startpath, startcode)  # var_list关键变量列表
-                        if not os.path.exists('./slice_graph'):
-                            os.mkdir('./slice_graph')
+                        # if not os.path.exists('./slice_graph'):
+                        #     os.mkdir('./slice_graph')
                         
-                        f=open(os.path.join('./slice_graph',fileID.split('/')[-1]+'@@'+func_name+'@@'+str(cnt)+'.pkl'),'wb')
-                        pickle.dump(graph,f)
-                        f.close()
+                        # f=open(os.path.join('./slice_graph',fileID.split('/')[-1]+'@@'+func_name+'@@'+str(cnt)+'.pkl'),'wb')
+                        # pickle.dump(graph,f)
+                        # f.close()
+    print('')
     return cnt
 
 if __name__ == "__main__":
@@ -780,7 +781,7 @@ if __name__ == "__main__":
     j.connectToDatabase()
     cnt=0
     for type in ['api','array','pointer','integer_overflow']:
-                                  cnt=type_slice(type,j,cnt)
+        cnt=type_slice(type,j,cnt)
 
 
 #1.向上切片，跨函数是从return开始向上切。

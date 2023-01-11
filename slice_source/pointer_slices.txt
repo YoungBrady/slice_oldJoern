@@ -1,0 +1,268 @@
+5 @@ /home/lyl/huawei_project/insertVul/old/PROJ/proj4/src/dmstor.c @@ proj_strtod @@ 107 @@ char c , * cp = nptr ;
+++ s location: 61 file: proj4/src/dmstor.c type: ExpressionStatement id: 5743
+return HUGE_VAL ; location: 59 file: proj4/src/dmstor.c type: ReturnStatement id: 5749
+break ; location: 55 file: proj4/src/dmstor.c type: BreakStatement id: 5766
+n = 2 location: 55 file: proj4/src/dmstor.c type: ExpressionStatement id: 5767
+if ( ( ! FIXREVERTER [ 38 ] && ( n < nl ) ) location: 77 file: proj4/src/dmstor.c type: Statement id: 5669
+) location: 81 file: proj4/src/dmstor.c type: Statement id: 5668
+if ( nl ) location: 57 file: proj4/src/dmstor.c type: Condition id: 5762
+case 'R' : location: 56 file: proj4/src/dmstor.c type: Label id: 5764
+char c , * cp = nptr ; location: 107 file: proj4/src/dmstor.c type: IdentifierDeclStatement id: 6080
+case 'r' : location: 56 file: proj4/src/dmstor.c type: Label id: 5765
+++ cp location: 125 file: proj4/src/dmstor.c type: ExpressionStatement id: 6029
+v += tv * vm [ n ] location: 88 file: proj4/src/dmstor.c type: ExpressionStatement id: 5645
+if ( ( n < nl ) && ! ( 0 ) ) location: 72 file: proj4/src/dmstor.c type: Condition id: 5706
+n = 4 location: 66 file: proj4/src/dmstor.c type: ExpressionStatement id: 5721
+v += tv * vm [ nl ] location: 65 file: proj4/src/dmstor.c type: ExpressionStatement id: 5727
+skip : location: 66 file: proj4/src/dmstor.c type: Label id: 5725
+case 'D' : location: 50 file: proj4/src/dmstor.c type: Label id: 5784
+result = strtod ( nptr , endptr ) location: 121 file: proj4/src/dmstor.c type: ExpressionStatement id: 6043
+if ( c == 'd' || c == 'D' ) location: 114 file: proj4/src/dmstor.c type: Condition id: 6060
+fprintf ( stderr , "reached bug index 38\n" ) location: 75 file: proj4/src/dmstor.c type: ExpressionStatement id: 5688
+case 'd' : location: 50 file: proj4/src/dmstor.c type: Label id: 5783
+while ( ( c = * cp ) != '\0' ) location: 113 file: proj4/src/dmstor.c type: Condition id: 6068
+fprintf ( stderr , "triggered bug index 38\n" ) location: 73 file: proj4/src/dmstor.c type: ExpressionStatement id: 5697
+return tv ; location: 48 file: proj4/src/dmstor.c type: ReturnStatement id: 5790
+n = 0 location: 51 file: proj4/src/dmstor.c type: ExpressionStatement id: 5779
+break ; location: 51 file: proj4/src/dmstor.c type: BreakStatement id: 5778
+goto skip ; location: 63 file: proj4/src/dmstor.c type: GotoStatement id: 5737
+case '"' : location: 54 file: proj4/src/dmstor.c type: Label id: 5771
+pj_ctx_set_errno ( ctx , - 16 ) location: 82 file: proj4/src/dmstor.c type: ExpressionStatement id: 5657
+n = 1 location: 53 file: proj4/src/dmstor.c type: ExpressionStatement id: 5773
+break ; location: 53 file: proj4/src/dmstor.c type: BreakStatement id: 5772
+v = tv location: 62 file: proj4/src/dmstor.c type: ExpressionStatement id: 5739
+case '\'' : location: 52 file: proj4/src/dmstor.c type: Label id: 5777
+continue ; location: 67 file: proj4/src/dmstor.c type: ContinueStatement id: 5720
+default : location: 64 file: proj4/src/dmstor.c type: Label id: 5735
+v = - v location: 97 file: proj4/src/dmstor.c type: ExpressionStatement id: 5594
+return HUGE_VAL ; location: 83 file: proj4/src/dmstor.c type: ReturnStatement id: 5655
+return pj_strtod ( nptr , endptr ) ; location: 130 file: proj4/src/dmstor.c type: ReturnStatement id: 6018
+if ( FIXREVERTER [ 38 ] ) location: 71 file: proj4/src/dmstor.c type: Condition id: 5714
+pj_ctx_set_errno ( ctx , - 16 ) location: 58 file: proj4/src/dmstor.c type: ExpressionStatement id: 5751
+if ( ( tv = proj_strtod ( s , & s ) ) == HUGE_VAL ) location: 47 file: proj4/src/dmstor.c type: Condition id: 5792
+return v ; location: 100 file: proj4/src/dmstor.c type: ReturnStatement id: 5576
+* cp = '\0' location: 120 file: proj4/src/dmstor.c type: ExpressionStatement id: 6054
+* cp = c location: 122 file: proj4/src/dmstor.c type: ExpressionStatement id: 6037
+switch ( * s ) location: 49 file: proj4/src/dmstor.c type: Condition id: 5785
+return result ; location: 123 file: proj4/src/dmstor.c type: ReturnStatement id: 6035
+------------------------------
+6 @@ /home/lyl/huawei_project/insertVul/old/PROJ/proj4/src/dmstor.c @@ proj_strtod @@ 104 @@ char * * endptr
+++ s location: 61 file: proj4/src/dmstor.c type: ExpressionStatement id: 5743
+return HUGE_VAL ; location: 59 file: proj4/src/dmstor.c type: ReturnStatement id: 5749
+break ; location: 55 file: proj4/src/dmstor.c type: BreakStatement id: 5766
+n = 2 location: 55 file: proj4/src/dmstor.c type: ExpressionStatement id: 5767
+if ( ( ! FIXREVERTER [ 38 ] && ( n < nl ) ) location: 77 file: proj4/src/dmstor.c type: Statement id: 5669
+) location: 81 file: proj4/src/dmstor.c type: Statement id: 5668
+if ( nl ) location: 57 file: proj4/src/dmstor.c type: Condition id: 5762
+case 'R' : location: 56 file: proj4/src/dmstor.c type: Label id: 5764
+case 'r' : location: 56 file: proj4/src/dmstor.c type: Label id: 5765
+switch ( * s ) location: 49 file: proj4/src/dmstor.c type: Condition id: 5785
+v += tv * vm [ n ] location: 88 file: proj4/src/dmstor.c type: ExpressionStatement id: 5645
+if ( ( n < nl ) && ! ( 0 ) ) location: 72 file: proj4/src/dmstor.c type: Condition id: 5706
+n = 4 location: 66 file: proj4/src/dmstor.c type: ExpressionStatement id: 5721
+v += tv * vm [ nl ] location: 65 file: proj4/src/dmstor.c type: ExpressionStatement id: 5727
+skip : location: 66 file: proj4/src/dmstor.c type: Label id: 5725
+case 'D' : location: 50 file: proj4/src/dmstor.c type: Label id: 5784
+result = strtod ( nptr , endptr ) location: 121 file: proj4/src/dmstor.c type: ExpressionStatement id: 6043
+fprintf ( stderr , "reached bug index 38\n" ) location: 75 file: proj4/src/dmstor.c type: ExpressionStatement id: 5688
+case 'd' : location: 50 file: proj4/src/dmstor.c type: Label id: 5783
+fprintf ( stderr , "triggered bug index 38\n" ) location: 73 file: proj4/src/dmstor.c type: ExpressionStatement id: 5697
+return tv ; location: 48 file: proj4/src/dmstor.c type: ReturnStatement id: 5790
+n = 0 location: 51 file: proj4/src/dmstor.c type: ExpressionStatement id: 5779
+break ; location: 51 file: proj4/src/dmstor.c type: BreakStatement id: 5778
+goto skip ; location: 63 file: proj4/src/dmstor.c type: GotoStatement id: 5737
+case '"' : location: 54 file: proj4/src/dmstor.c type: Label id: 5771
+pj_ctx_set_errno ( ctx , - 16 ) location: 82 file: proj4/src/dmstor.c type: ExpressionStatement id: 5657
+n = 1 location: 53 file: proj4/src/dmstor.c type: ExpressionStatement id: 5773
+break ; location: 53 file: proj4/src/dmstor.c type: BreakStatement id: 5772
+v = tv location: 62 file: proj4/src/dmstor.c type: ExpressionStatement id: 5739
+case '\'' : location: 52 file: proj4/src/dmstor.c type: Label id: 5777
+char * * endptr location: 104 file: proj4/src/dmstor.c type: Parameter id: 6010
+default : location: 64 file: proj4/src/dmstor.c type: Label id: 5735
+v = - v location: 97 file: proj4/src/dmstor.c type: ExpressionStatement id: 5594
+return HUGE_VAL ; location: 83 file: proj4/src/dmstor.c type: ReturnStatement id: 5655
+return pj_strtod ( nptr , endptr ) ; location: 130 file: proj4/src/dmstor.c type: ReturnStatement id: 6018
+if ( FIXREVERTER [ 38 ] ) location: 71 file: proj4/src/dmstor.c type: Condition id: 5714
+pj_ctx_set_errno ( ctx , - 16 ) location: 58 file: proj4/src/dmstor.c type: ExpressionStatement id: 5751
+if ( ( tv = proj_strtod ( s , & s ) ) == HUGE_VAL ) location: 47 file: proj4/src/dmstor.c type: Condition id: 5792
+return v ; location: 100 file: proj4/src/dmstor.c type: ReturnStatement id: 5576
+continue ; location: 67 file: proj4/src/dmstor.c type: ContinueStatement id: 5720
+return result ; location: 123 file: proj4/src/dmstor.c type: ReturnStatement id: 6035
+------------------------------
+7 @@ /home/lyl/huawei_project/insertVul/old/PROJ/proj4/src/dmstor.c @@ proj_strtod @@ 104 @@ char * nptr
+++ s location: 61 file: proj4/src/dmstor.c type: ExpressionStatement id: 5743
+return HUGE_VAL ; location: 59 file: proj4/src/dmstor.c type: ReturnStatement id: 5749
+break ; location: 55 file: proj4/src/dmstor.c type: BreakStatement id: 5766
+n = 2 location: 55 file: proj4/src/dmstor.c type: ExpressionStatement id: 5767
+if ( ( ! FIXREVERTER [ 38 ] && ( n < nl ) ) location: 77 file: proj4/src/dmstor.c type: Statement id: 5669
+) location: 81 file: proj4/src/dmstor.c type: Statement id: 5668
+if ( nl ) location: 57 file: proj4/src/dmstor.c type: Condition id: 5762
+case 'R' : location: 56 file: proj4/src/dmstor.c type: Label id: 5764
+char c , * cp = nptr ; location: 107 file: proj4/src/dmstor.c type: IdentifierDeclStatement id: 6080
+case 'r' : location: 56 file: proj4/src/dmstor.c type: Label id: 5765
+++ cp location: 125 file: proj4/src/dmstor.c type: ExpressionStatement id: 6029
+v += tv * vm [ n ] location: 88 file: proj4/src/dmstor.c type: ExpressionStatement id: 5645
+if ( ( n < nl ) && ! ( 0 ) ) location: 72 file: proj4/src/dmstor.c type: Condition id: 5706
+n = 4 location: 66 file: proj4/src/dmstor.c type: ExpressionStatement id: 5721
+v += tv * vm [ nl ] location: 65 file: proj4/src/dmstor.c type: ExpressionStatement id: 5727
+skip : location: 66 file: proj4/src/dmstor.c type: Label id: 5725
+case 'D' : location: 50 file: proj4/src/dmstor.c type: Label id: 5784
+result = strtod ( nptr , endptr ) location: 121 file: proj4/src/dmstor.c type: ExpressionStatement id: 6043
+if ( c == 'd' || c == 'D' ) location: 114 file: proj4/src/dmstor.c type: Condition id: 6060
+fprintf ( stderr , "reached bug index 38\n" ) location: 75 file: proj4/src/dmstor.c type: ExpressionStatement id: 5688
+case 'd' : location: 50 file: proj4/src/dmstor.c type: Label id: 5783
+while ( ( c = * cp ) != '\0' ) location: 113 file: proj4/src/dmstor.c type: Condition id: 6068
+fprintf ( stderr , "triggered bug index 38\n" ) location: 73 file: proj4/src/dmstor.c type: ExpressionStatement id: 5697
+return tv ; location: 48 file: proj4/src/dmstor.c type: ReturnStatement id: 5790
+n = 0 location: 51 file: proj4/src/dmstor.c type: ExpressionStatement id: 5779
+break ; location: 51 file: proj4/src/dmstor.c type: BreakStatement id: 5778
+goto skip ; location: 63 file: proj4/src/dmstor.c type: GotoStatement id: 5737
+case '"' : location: 54 file: proj4/src/dmstor.c type: Label id: 5771
+pj_ctx_set_errno ( ctx , - 16 ) location: 82 file: proj4/src/dmstor.c type: ExpressionStatement id: 5657
+n = 1 location: 53 file: proj4/src/dmstor.c type: ExpressionStatement id: 5773
+break ; location: 53 file: proj4/src/dmstor.c type: BreakStatement id: 5772
+v = tv location: 62 file: proj4/src/dmstor.c type: ExpressionStatement id: 5739
+case '\'' : location: 52 file: proj4/src/dmstor.c type: Label id: 5777
+continue ; location: 67 file: proj4/src/dmstor.c type: ContinueStatement id: 5720
+default : location: 64 file: proj4/src/dmstor.c type: Label id: 5735
+char * nptr location: 104 file: proj4/src/dmstor.c type: Parameter id: 6013
+v = - v location: 97 file: proj4/src/dmstor.c type: ExpressionStatement id: 5594
+return HUGE_VAL ; location: 83 file: proj4/src/dmstor.c type: ReturnStatement id: 5655
+return pj_strtod ( nptr , endptr ) ; location: 130 file: proj4/src/dmstor.c type: ReturnStatement id: 6018
+if ( FIXREVERTER [ 38 ] ) location: 71 file: proj4/src/dmstor.c type: Condition id: 5714
+pj_ctx_set_errno ( ctx , - 16 ) location: 58 file: proj4/src/dmstor.c type: ExpressionStatement id: 5751
+if ( ( tv = proj_strtod ( s , & s ) ) == HUGE_VAL ) location: 47 file: proj4/src/dmstor.c type: Condition id: 5792
+return v ; location: 100 file: proj4/src/dmstor.c type: ReturnStatement id: 5576
+* cp = '\0' location: 120 file: proj4/src/dmstor.c type: ExpressionStatement id: 6054
+* cp = c location: 122 file: proj4/src/dmstor.c type: ExpressionStatement id: 6037
+switch ( * s ) location: 49 file: proj4/src/dmstor.c type: Condition id: 5785
+return result ; location: 123 file: proj4/src/dmstor.c type: ReturnStatement id: 6035
+------------------------------
+8 @@ /home/lyl/huawei_project/insertVul/old/PROJ/proj4/src/dmstor.c @@ dmstor_ctx @@ 30 @@ char * p , * s , work [ MAX_WORK ] ;
+if ( ( tv = proj_strtod ( s , & s ) ) == HUGE_VAL ) location: 47 file: proj4/src/dmstor.c type: Condition id: 5792
+return v ; location: 100 file: proj4/src/dmstor.c type: ReturnStatement id: 5576
+if ( * s && ( p = strchr ( sym , * s ) ) ) location: 92 file: proj4/src/dmstor.c type: Condition id: 5622
+++ s location: 94 file: proj4/src/dmstor.c type: ExpressionStatement id: 5606
+if ( sign == '-' ) location: 96 file: proj4/src/dmstor.c type: Condition id: 5600
+n = 2 location: 55 file: proj4/src/dmstor.c type: ExpressionStatement id: 5767
+break ; location: 55 file: proj4/src/dmstor.c type: BreakStatement id: 5766
+return HUGE_VAL ; location: 59 file: proj4/src/dmstor.c type: ReturnStatement id: 5749
+if ( ( ! FIXREVERTER [ 38 ] && ( n < nl ) ) location: 77 file: proj4/src/dmstor.c type: Statement id: 5669
+for ( n = MAX_WORK , s = work , p = ( char * ) is ; isgraph ( * p ) && -- n ; ) location: 37 file: proj4/src/dmstor.c type: Condition id: 5888
+if ( nl ) location: 57 file: proj4/src/dmstor.c type: Condition id: 5762
+case 'R' : location: 56 file: proj4/src/dmstor.c type: Label id: 5764
+) location: 81 file: proj4/src/dmstor.c type: Statement id: 5668
+nl = n + 1 location: 45 file: proj4/src/dmstor.c type: AssignmentExpr id: 5826
+return dmstor_ctx ( pj_get_default_ctx ( ) , is , rs ) ; location: 24 file: proj4/src/dmstor.c type: ReturnStatement id: 5542
+v += tv * vm [ n ] location: 88 file: proj4/src/dmstor.c type: ExpressionStatement id: 5645
+if ( ( n < nl ) && ! ( 0 ) ) location: 72 file: proj4/src/dmstor.c type: Condition id: 5706
+n = 4 location: 66 file: proj4/src/dmstor.c type: ExpressionStatement id: 5721
+v += tv * vm [ nl ] location: 65 file: proj4/src/dmstor.c type: ExpressionStatement id: 5727
+char * p , * s , work [ MAX_WORK ] ; location: 30 file: proj4/src/dmstor.c type: IdentifierDeclStatement id: 5949
+case 'D' : location: 50 file: proj4/src/dmstor.c type: Label id: 5784
+switch ( * s ) location: 49 file: proj4/src/dmstor.c type: Condition id: 5785
+sign = '+' location: 44 file: proj4/src/dmstor.c type: ExpressionStatement id: 5845
+n = MAX_WORK , s = work , p = ( char * ) is ; location: 37 file: proj4/src/dmstor.c type: ForInit id: 5901
+* s = '\0' location: 39 file: proj4/src/dmstor.c type: ExpressionStatement id: 5869
+fprintf ( stderr , "reached bug index 38\n" ) location: 75 file: proj4/src/dmstor.c type: ExpressionStatement id: 5688
+case 'd' : location: 50 file: proj4/src/dmstor.c type: Label id: 5783
+sign = * ( s = work ) location: 42 file: proj4/src/dmstor.c type: ExpressionStatement id: 5861
+s ++ location: 43 file: proj4/src/dmstor.c type: ExpressionStatement id: 5849
+if ( ! ( isdigit ( * s ) || * s == '.' ) ) location: 46 file: proj4/src/dmstor.c type: Condition id: 5809
+return tv ; location: 48 file: proj4/src/dmstor.c type: ReturnStatement id: 5790
+n = 0 location: 51 file: proj4/src/dmstor.c type: ExpressionStatement id: 5779
+break ; location: 51 file: proj4/src/dmstor.c type: BreakStatement id: 5778
+pj_ctx_set_errno ( ctx , - 16 ) location: 58 file: proj4/src/dmstor.c type: ExpressionStatement id: 5751
+case '"' : location: 54 file: proj4/src/dmstor.c type: Label id: 5771
+pj_ctx_set_errno ( ctx , - 16 ) location: 82 file: proj4/src/dmstor.c type: ExpressionStatement id: 5657
+n = 1 location: 53 file: proj4/src/dmstor.c type: ExpressionStatement id: 5773
+return HUGE_VAL ; location: 83 file: proj4/src/dmstor.c type: ReturnStatement id: 5655
+v = tv location: 62 file: proj4/src/dmstor.c type: ExpressionStatement id: 5739
+break ; location: 46 file: proj4/src/dmstor.c type: BreakStatement id: 5808
+case '\'' : location: 52 file: proj4/src/dmstor.c type: Label id: 5777
+if ( rs ) location: 98 file: proj4/src/dmstor.c type: Condition id: 5591
+default : location: 64 file: proj4/src/dmstor.c type: Label id: 5735
+case 'r' : location: 56 file: proj4/src/dmstor.c type: Label id: 5765
+v = - v location: 97 file: proj4/src/dmstor.c type: ExpressionStatement id: 5594
+* rs = ( char * ) is + ( s - work ) location: 99 file: proj4/src/dmstor.c type: ExpressionStatement id: 5579
+for ( v = 0. , nl = 0 ; nl < 3 ; nl = n + 1 ) location: 45 file: proj4/src/dmstor.c type: Condition id: 5831
+skip : location: 66 file: proj4/src/dmstor.c type: Label id: 5725
+sign = ( p - sym ) >= 4 ? '-' : '+' location: 93 file: proj4/src/dmstor.c type: ExpressionStatement id: 5610
+if ( FIXREVERTER [ 38 ] ) location: 71 file: proj4/src/dmstor.c type: Condition id: 5714
+goto skip ; location: 63 file: proj4/src/dmstor.c type: GotoStatement id: 5737
+++ s location: 61 file: proj4/src/dmstor.c type: ExpressionStatement id: 5743
+* s ++ = * p ++ location: 38 file: proj4/src/dmstor.c type: ExpressionStatement id: 5876
+fprintf ( stderr , "triggered bug index 38\n" ) location: 73 file: proj4/src/dmstor.c type: ExpressionStatement id: 5697
+break ; location: 53 file: proj4/src/dmstor.c type: BreakStatement id: 5772
+if ( sign == '+' || sign == '-' ) location: 43 file: proj4/src/dmstor.c type: Condition id: 5853
+continue ; location: 67 file: proj4/src/dmstor.c type: ContinueStatement id: 5720
+------------------------------
+9 @@ /home/lyl/huawei_project/insertVul/old/PROJ/proj4/src/dmstor.c @@ dmstor_ctx @@ 28 @@ char * * rs
+if ( rs ) location: 98 file: proj4/src/dmstor.c type: Condition id: 5591
+if ( rs ) location: 33 file: proj4/src/dmstor.c type: Condition id: 5940
+* rs = ( char * ) is location: 34 file: proj4/src/dmstor.c type: ExpressionStatement id: 5932
+* rs = ( char * ) is + ( s - work ) location: 99 file: proj4/src/dmstor.c type: ExpressionStatement id: 5579
+return dmstor_ctx ( pj_get_default_ctx ( ) , is , rs ) ; location: 24 file: proj4/src/dmstor.c type: ReturnStatement id: 5542
+char * * rs location: 28 file: proj4/src/dmstor.c type: Parameter id: 5565
+------------------------------
+10 @@ /home/lyl/huawei_project/insertVul/old/PROJ/proj4/src/dmstor.c @@ dmstor_ctx @@ 28 @@ const char * is
+if ( ! ( isdigit ( * s ) || * s == '.' ) ) location: 46 file: proj4/src/dmstor.c type: Condition id: 5809
+if ( ( tv = proj_strtod ( s , & s ) ) == HUGE_VAL ) location: 47 file: proj4/src/dmstor.c type: Condition id: 5792
+if ( * s && ( p = strchr ( sym , * s ) ) ) location: 92 file: proj4/src/dmstor.c type: Condition id: 5622
+++ s location: 94 file: proj4/src/dmstor.c type: ExpressionStatement id: 5606
+if ( sign == '-' ) location: 96 file: proj4/src/dmstor.c type: Condition id: 5600
+n = 2 location: 55 file: proj4/src/dmstor.c type: ExpressionStatement id: 5767
+break ; location: 55 file: proj4/src/dmstor.c type: BreakStatement id: 5766
+return HUGE_VAL ; location: 59 file: proj4/src/dmstor.c type: ReturnStatement id: 5749
+if ( ( ! FIXREVERTER [ 38 ] && ( n < nl ) ) location: 77 file: proj4/src/dmstor.c type: Statement id: 5669
+for ( n = MAX_WORK , s = work , p = ( char * ) is ; isgraph ( * p ) && -- n ; ) location: 37 file: proj4/src/dmstor.c type: Condition id: 5888
+v += tv * vm [ n ] location: 88 file: proj4/src/dmstor.c type: ExpressionStatement id: 5645
+case 'R' : location: 56 file: proj4/src/dmstor.c type: Label id: 5764
+) location: 81 file: proj4/src/dmstor.c type: Statement id: 5668
+const char * is location: 28 file: proj4/src/dmstor.c type: Parameter id: 5568
+nl = n + 1 location: 45 file: proj4/src/dmstor.c type: AssignmentExpr id: 5826
+return dmstor_ctx ( pj_get_default_ctx ( ) , is , rs ) ; location: 24 file: proj4/src/dmstor.c type: ReturnStatement id: 5542
+if ( nl ) location: 57 file: proj4/src/dmstor.c type: Condition id: 5762
+if ( ( n < nl ) && ! ( 0 ) ) location: 72 file: proj4/src/dmstor.c type: Condition id: 5706
+n = 4 location: 66 file: proj4/src/dmstor.c type: ExpressionStatement id: 5721
+v += tv * vm [ nl ] location: 65 file: proj4/src/dmstor.c type: ExpressionStatement id: 5727
+skip : location: 66 file: proj4/src/dmstor.c type: Label id: 5725
+case 'D' : location: 50 file: proj4/src/dmstor.c type: Label id: 5784
+switch ( * s ) location: 49 file: proj4/src/dmstor.c type: Condition id: 5785
+sign = '+' location: 44 file: proj4/src/dmstor.c type: ExpressionStatement id: 5845
+n = MAX_WORK , s = work , p = ( char * ) is ; location: 37 file: proj4/src/dmstor.c type: ForInit id: 5901
+while ( isspace ( sign = * is ) ) location: 36 file: proj4/src/dmstor.c type: Condition id: 5920
+fprintf ( stderr , "reached bug index 38\n" ) location: 75 file: proj4/src/dmstor.c type: ExpressionStatement id: 5688
+case 'd' : location: 50 file: proj4/src/dmstor.c type: Label id: 5783
+* s = '\0' location: 39 file: proj4/src/dmstor.c type: ExpressionStatement id: 5869
+s ++ location: 43 file: proj4/src/dmstor.c type: ExpressionStatement id: 5849
+fprintf ( stderr , "triggered bug index 38\n" ) location: 73 file: proj4/src/dmstor.c type: ExpressionStatement id: 5697
+return tv ; location: 48 file: proj4/src/dmstor.c type: ReturnStatement id: 5790
+n = 0 location: 51 file: proj4/src/dmstor.c type: ExpressionStatement id: 5779
+break ; location: 51 file: proj4/src/dmstor.c type: BreakStatement id: 5778
+pj_ctx_set_errno ( ctx , - 16 ) location: 58 file: proj4/src/dmstor.c type: ExpressionStatement id: 5751
+case '"' : location: 54 file: proj4/src/dmstor.c type: Label id: 5771
+pj_ctx_set_errno ( ctx , - 16 ) location: 82 file: proj4/src/dmstor.c type: ExpressionStatement id: 5657
+n = 1 location: 53 file: proj4/src/dmstor.c type: ExpressionStatement id: 5773
+return HUGE_VAL ; location: 83 file: proj4/src/dmstor.c type: ReturnStatement id: 5655
+v = tv location: 62 file: proj4/src/dmstor.c type: ExpressionStatement id: 5739
+break ; location: 46 file: proj4/src/dmstor.c type: BreakStatement id: 5808
+case '\'' : location: 52 file: proj4/src/dmstor.c type: Label id: 5777
+if ( rs ) location: 98 file: proj4/src/dmstor.c type: Condition id: 5591
+default : location: 64 file: proj4/src/dmstor.c type: Label id: 5735
+case 'r' : location: 56 file: proj4/src/dmstor.c type: Label id: 5765
+v = - v location: 97 file: proj4/src/dmstor.c type: ExpressionStatement id: 5594
+* rs = ( char * ) is + ( s - work ) location: 99 file: proj4/src/dmstor.c type: ExpressionStatement id: 5579
+for ( v = 0. , nl = 0 ; nl < 3 ; nl = n + 1 ) location: 45 file: proj4/src/dmstor.c type: Condition id: 5831
+return v ; location: 100 file: proj4/src/dmstor.c type: ReturnStatement id: 5576
+sign = ( p - sym ) >= 4 ? '-' : '+' location: 93 file: proj4/src/dmstor.c type: ExpressionStatement id: 5610
+if ( FIXREVERTER [ 38 ] ) location: 71 file: proj4/src/dmstor.c type: Condition id: 5714
+goto skip ; location: 63 file: proj4/src/dmstor.c type: GotoStatement id: 5737
+++ s location: 61 file: proj4/src/dmstor.c type: ExpressionStatement id: 5743
+* s ++ = * p ++ location: 38 file: proj4/src/dmstor.c type: ExpressionStatement id: 5876
+* rs = ( char * ) is location: 34 file: proj4/src/dmstor.c type: ExpressionStatement id: 5932
+break ; location: 53 file: proj4/src/dmstor.c type: BreakStatement id: 5772
+if ( sign == '+' || sign == '-' ) location: 43 file: proj4/src/dmstor.c type: Condition id: 5853
+++ is location: 36 file: proj4/src/dmstor.c type: ExpressionStatement id: 5916
+continue ; location: 67 file: proj4/src/dmstor.c type: ContinueStatement id: 5720
+------------------------------

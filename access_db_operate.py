@@ -636,7 +636,7 @@ def getCallGraph(db, testID):
             classname = function_name.split('::')[0].strip()
 
             if func_name == classname: #is a class::class, is a statementnode or a iddeclnode
-                print (1)
+                # print (1)
                 list_callee_id = []
                 list_delete_node = get_all_delete_node(db, testID)  #delete object
                 # print "list_delete_node: ",list_delete_node
@@ -686,7 +686,7 @@ def getCallGraph(db, testID):
                         continue
 
             elif func_name.replace('~', '') == classname:#is a class::~class
-                print (2)
+                # print (2)
                 list_callee_id = []
                 list_delete_node = get_all_delete_node(db, testID)
                 if list_delete_node == False:
@@ -724,7 +724,7 @@ def getCallGraph(db, testID):
                         continue
 
             else:
-                print (3)
+                # print (3)
                 tag = 'func'
                 list_callee_id = []
                 for _t in list_all_callee:#_t is a tuple, _t[0] is nodeid, 1 is funcname, 2 is func_id
