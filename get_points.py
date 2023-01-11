@@ -2,7 +2,7 @@
 from __future__ import print_function
 from access_db_operate import *
 import  sys
-
+import bisect
 def rmv_str(s):  # 去除了字符串
     while "\'" in s:
         indL = s.find('\'')
@@ -521,6 +521,7 @@ def get_funcid_by_linenum_filename(db,linenum,filename):
     
 
 def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
+    pkl_path='/home/SySeVR/code/slice_oldJoern/pkl'
     if filetype=='funded':
         f=open('/home/lyl/useful/graph_slice/code/pkl/cwe2file2linenum_%s.pkl'%old_or_new,'rb')
         cwe2file2linenum=pickle.load(f)
@@ -580,6 +581,19 @@ def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
             # print(file2funcname)
             f.close()
 
+    elif filetype=="insertVul":
+        func_ids=set()
+        file2func=get_allFuncInfo(db)
+        f=open('./pkl/beginline_dict.pkl','rb')
+        beginline_dict=pickle.load(f)
+        f.close()
+        for file in beginline_dict[old_or_new]:
+            fileid=os.path.join(filepath,file)
+            if fileid in file2func:
+                for linenum in beginline_dict[old_or_new][fileid]:
+                    funcid=get_funcidbyloc(linenum,file2func[fileid])
+                    func_ids.add(funcid)
+
         return func_ids
 def get_funcid_by_funcname(funcnames):
     funcids=set()
@@ -598,6 +612,28 @@ def get_funcname_by_funcid(funcids):
         funcnames.add(funcname)
     return funcnames
 
+def get_allFuncInfo(db):
+  query='queryNodeIndex("type:Function")'
+  results = db.runGremlinQuery(query)
+  file2func={}
+  for result in results:
+    funcid=result._id
+    func_loc=int(result['location'].split(':')[0])
+    filepath=getFuncFile(db,funcid)
+    if filepath not in file2func:
+      file2func[filepath]=set()
+    file2func[filepath].add((funcid,func_loc))
+
+  for file in file2func:
+    file2func[file]=list(file2func[file])
+    file2func[file].sort(key=lambda x:x[1])
+  return file2func
+
+def get_funcidbyloc(loc,funclist):
+  loc_list=[x for _,x in funclist ]
+  index=bisect.bisect(loc_list,loc)
+  # print(funclist[index],funclist[index+1])
+  return funclist[index-1][0]
 if __name__ == '__main__':
     j = JoernSteps()
     j.connectToDatabase()

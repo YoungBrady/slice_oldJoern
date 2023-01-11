@@ -4,30 +4,30 @@
 startTime=`date +"%Y-%m-%d %H:%M:%S"`
 
 # source /etc/profile
-neo4j_path=/opt/neo4j-community-2.1.8/bin
-joern_path=/opt/joern-0.3.1
-batch=$1
-slice_root=/home/lyl/huawei_project
-code_path=$slice_root/code
+neo4j_path=/home/SySeVR/neo4j/bin
+joern_path=/home/SySeVR/joern-0.3.1
+# batch=$1
+slice_root=/home/SySeVR/code
+code_path=$slice_root/slice_oldJoern
 
-data_path=$slice_root/NVD
-if [[ $2 == 's' ]];then
+data_path=$slice_root/benchmark
+if [[ $1 == 's' ]];then
 
-  for cwe in $(ls $data_path)
+  for dir in $(ls $data_path)
   do
-    for cve in $(ls $data_path/$cwe/merge/$batch)
-    do
-      if [[ $cve != 'ffmpegCVE-2011-3929' ]];then
-        continue
-      fi
-      for type in {'old','new'}
-      do
+    # for cve in $(ls $data_path/$cwe/merge/$batch)
+    # do
+      # if [[ $cve != 'ffmpegCVE-2011-3929' ]];then
+      #   continue
+      # fi
+      # for type in {'old','new'}
+      # do
           # if [[ $type == 'new' ]];then
           # continue
           # fi
-          data_batch="$data_path/$cwe/merge/$batch/$cve/$type" # 源代码路径
+          data_batch="$data_path/$dir" # 源代码路径
           
-          batch_dir="$slice_root/slice_all/NVD/$cwe/$batch/$cve/$type" # 存放切片结果
+          batch_dir="$slice_root/slice_all/$dir" # 存放切片结果
           echo $batch_dir
           output_path="$batch_dir/logs/output.txt"
           error_path="$batch_dir/logs/error.txt"
@@ -51,7 +51,7 @@ if [[ $2 == 's' ]];then
           error_path="$batch_dir/logs/error.txt"
           # break
           cd $neo4j_path
-          sudo ./neo4j stop
+          ./neo4j stop
           sleep 5
           status=`./neo4j status`
           if [[ "$status"x == "Neo4j Server is not running"x ]];then
@@ -81,7 +81,7 @@ if [[ $2 == 's' ]];then
           #   exit 1
           # fi
           cd $neo4j_path
-          sudo ./neo4j start-no-wait
+          ./neo4j start-no-wait
           sleep 20
           status=`./neo4j status`
           if [[ "${status:0:30}"x == "Neo4j Server is running at pid"x ]];then
@@ -117,14 +117,14 @@ if [[ $2 == 's' ]];then
             echo "del edges_source complete!"
           fi
 
-          sudo python2 $code_path/get_cfg_relation.py 2>> $error_path
+          python2 $code_path/get_cfg_relation.py 2>> $error_path
           if [[ ! -s $error_path ]];then
             echo "build cfg completed!"
           else
             echo "build cfg failed!" >> $output_path
             continue
           fi
-          sudo python2 $code_path/complete_PDG.py 2>> $error_path
+          python2 $code_path/complete_PDG.py 2>> $error_path
           if [[ ! -s $error_path ]];then
             echo "build pdg completed!"
           else
@@ -139,36 +139,36 @@ if [[ $2 == 's' ]];then
           #   continue
           # fi
 
-          sudo python2 $code_path/access_db_operate.py 2>> $error_path
+          python2 $code_path/access_db_operate.py 2>> $error_path
           if [[ ! -s $error_path ]];then
             echo "build dict completed!"
           else
             echo "build dict failed!" >> $output_path
             continue
           fi
-          sudo python2 $code_path/get_points.py $data_batch NVD $type 2>> $error_path
-          if [[ ! -s $error_path ]];then
-            echo "get points completed!"
-          else
-            echo "get points failed!" >> $output_path
-            continue
-          fi
-          sudo python2 $code_path/get_slices.py 2>> $error_path
-          if [[ ! -s $error_path ]];then
-            echo "get slice completed!"
-          else
-            echo $data_batch"get slice failed!" >> $output_path
-            continue
-          fi
-          python3 $code_path/draw_slice.py $type 2>> $error_path
-          if [[ ! -s $error_path ]];then
-            echo "draw slice completed!"
-          else
-            echo $data_batch"draw slice failed!" >> $output_path
-            continue
-          fi
-      done
-    done
+    #       python2 $code_path/get_points.py $data_batch NVD $type 2>> $error_path
+    #       if [[ ! -s $error_path ]];then
+    #         echo "get points completed!"
+    #       else
+    #         echo "get points failed!" >> $output_path
+    #         continue
+    #       fi
+    #       python2 $code_path/get_slices.py 2>> $error_path
+    #       if [[ ! -s $error_path ]];then
+    #         echo "get slice completed!"
+    #       else
+    #         echo $data_batch"get slice failed!" >> $output_path
+    #         continue
+    #       fi
+    #       python3 $code_path/draw_slice.py $type 2>> $error_path
+    #       if [[ ! -s $error_path ]];then
+    #         echo "draw slice completed!"
+    #       else
+    #         echo $data_batch"draw slice failed!" >> $output_path
+    #         continue
+    #       fi
+    #   done
+    # done
   done
 
 else
