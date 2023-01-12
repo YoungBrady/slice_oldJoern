@@ -454,7 +454,8 @@ def get_all_calls_node(db, testID):
     for node in getFuncNodeInTestID(db, testID):
         func_id = node._id
         list_callee_func = getCalleeNode(db, func_id)
-        
+        if not os.path.exists(os.path.join("pdg_db", testID, node.properties['name'] + '_' + str(node._id))):
+            continue
         fin = open(os.path.join("pdg_db", testID, node.properties['name'] + '_' + str(node._id)))
         pdg = pickle.load(fin)
         fin.close()
@@ -806,8 +807,8 @@ def get_func_relation():
         i+=1
         if os.path.exists(os.path.join("dict_call2cfgNodeID_funcID", str(testID))):
             continue
-        if testID in ['CVE-2013-2212','CVE-2013-1918']:
-            continue
+        # if testID in ['CVE-2013-2212','CVE-2013-1918']:
+        #     continue
         # print testID
 
         call_g,func_pointer_dict = getCallGraph(j, testID)
@@ -839,5 +840,6 @@ def get_func_relation():
         f.close()
 
 if __name__ == "__main__":
+    print('')
     get_func_relation()
 

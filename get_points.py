@@ -521,7 +521,7 @@ def get_funcid_by_linenum_filename(db,linenum,filename):
     
 
 def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
-    pkl_path='/home/lyl/huawei_project/slice_oldJoern/pkl'
+    pkl_path='/home/SySeVR/code/slice_oldJoern/pkl'
     if filetype=='funded':
         f=open('/home/lyl/useful/graph_slice/code/pkl/cwe2file2linenum_%s.pkl'%old_or_new,'rb')
         cwe2file2linenum=pickle.load(f)

@@ -279,7 +279,10 @@ def get_cfg_relation():
         print('\r',end='')
         print('cfg:',i,'/',len1,' ',end='')
         i+=1
-        testID = getFuncFile(j, node._id).split('/')[-2]
+        funcfile=getFuncFile(j, node._id)
+        if i==2497:
+            print(funcfile)
+        testID = funcfile.split('/')[-2]
         path = os.path.join("cfg_db", testID)
         if not os.path.exists(path):
             os.makedirs(path)
