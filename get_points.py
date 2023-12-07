@@ -3,6 +3,7 @@ from __future__ import print_function
 from access_db_operate import *
 import  sys
 import bisect
+import os
 def rmv_str(s):  # 去除了字符串
     while "\'" in s:
         indL = s.find('\'')
@@ -521,7 +522,7 @@ def get_funcid_by_linenum_filename(db,linenum,filename):
     
 
 def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
-    pkl_path='/home/SySeVR/code/slice_oldJoern/pkl'
+    # pkl_path='/home/lyl/huawei_project/slice_oldJoern/pkl'
     if filetype=='funded':
         f=open('/home/lyl/useful/graph_slice/code/pkl/cwe2file2linenum_%s.pkl'%old_or_new,'rb')
         cwe2file2linenum=pickle.load(f)
@@ -536,52 +537,33 @@ def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
                     func_ids.add(func_id)
         return func_id
     elif filetype =='NVD':
-        cwe=filepath.split('/')[-5]
+        cwe=filepath.split('/')[-4]
         batch=filepath.split('/')[-3]
-        cve=filepath.split('/')[-2]
+        cve=filepath.split('/')[-1]
         print(filepath)
-        f=open('/home/lyl/huawei_project/code/pkl/%s_%s.pkl'%(cwe,old_or_new),'rb')
-        file2linenum=pickle.load(f)
-        f.close()
+        pkl_path='/home/sagpool/data2slice/NVD/%s'%cwe
+        # pkl_path='/home/lyl/huawei_project/slice_oldJoern/pkl'
+
         func_ids=set()
-        if old_or_new=='old':
-            file2funcname={}
-        else:
-            f=open('/home/lyl/huawei_project/code/pkl/%s_file2funcname_%s.pkl'%(cve,batch),'rb')
-            file2funcname=pickle.load(f)
-            f.close()
-            # print(file2funcname)
-        for filename in os.listdir(filepath):
-            funcids_file=set()
-            if filename[:-8]in file2linenum:
-                linenums=file2linenum[filename[:-8]]
-                for linenum in linenums:
-                    func_id=get_funcid_by_linenum_filename(db,linenum,filename)
-                    i=0
-                    while func_id==False:
-                        i+=1
-                        func_id=get_funcid_by_linenum_filename(db,linenum-i,filename)
-                        if i>3:
-                            break
-                    if func_id==False:
-                        print("can't find funcid")
-                        continue
-                    funcids_file.add(func_id)
-            func_ids=func_ids|funcids_file
-            if old_or_new=='old':
-                funcnames=get_funcname_by_funcid(funcids_file)
-                file2funcname[filename[:-8]]=funcnames
-            else:
-                funcnames=file2funcname[filename[:-8]]
-                funcids=get_funcid_by_funcname(funcnames)
-                func_ids=func_ids|funcids
-        if old_or_new=='old':
-            f=open('/home/lyl/huawei_project/code/pkl/%s_file2funcname_%s.pkl'%(cve,batch),'wb')      
-            pickle.dump(file2funcname,f) 
-            # print(file2funcname)
-            f.close()
+        file2func=get_allFuncInfo(db,filetype)
+        f=open(pkl_path+'/%s_begin_dict.pkl'%cwe,'rb')
+        beginline_dict=pickle.load(f)
+        f.close()
+        for file in beginline_dict[old_or_new]:
+            # if file.split('/')[0]!='PROJ':
+            #     continue
+            fileid=file
+
+            if fileid in file2func:
+                # print(beginline_dict[old_or_new][file])
+                for linenum in beginline_dict[old_or_new][file]:
+                    funcid=get_funcidbyloc(int(linenum),file2func[fileid])
+                    func_ids.add(funcid)
+        return func_ids
 
     elif filetype=="insertVul":
+        pkl_path='/home/sagpool/slice_oldJoern/pkl'
+
         func_ids=set()
         file2func=get_allFuncInfo(db)
         f=open(pkl_path+'/beginline_dict.pkl','rb')
@@ -591,7 +573,10 @@ def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
             # if file.split('/')[0]!='PROJ':
             #     continue
             fileid=os.path.join(filepath,file)
+            print(file)
+
             if fileid in file2func:
+                # print(beginline_dict[old_or_new][file])
                 for linenum in beginline_dict[old_or_new][file]:
                     funcid=get_funcidbyloc(linenum,file2func[fileid])
                     func_ids.add(funcid)
@@ -614,14 +599,19 @@ def get_funcname_by_funcid(funcids):
         funcnames.add(funcname)
     return funcnames
 
-def get_allFuncInfo(db):
+def get_allFuncInfo(db,filetype):
   query='queryNodeIndex("type:Function")'
   results = db.runGremlinQuery(query)
+#   print('results_len:',len(results))
   file2func={}
   for result in results:
     funcid=result._id
     func_loc=int(result['location'].split(':')[0])
     filepath=getFuncFile(db,funcid)
+    # print(filepath)
+    if filetype=='NVD':
+        filepath=filepath.split('/')[-1]
+        filepath=('.').join(filepath.split('.')[:-2])
     if filepath not in file2func:
       file2func[filepath]=set()
     file2func[filepath].add((funcid,func_loc))
@@ -643,32 +633,51 @@ if __name__ == '__main__':
     filetype=sys.argv[2]
     new_or_old=sys.argv[3]
     # filepath='/home/lyl/huawei_project/insertVul/old'
-    # filetype='insertVul'
+    # filepath='/home/lyl/huawei_project/NVD/CWE-119/merge/0/ffmpegCVE-2011-3929/new'
+
+    # filetype='NVD'
     # new_or_old='new'
     print(filepath,filetype,new_or_old)
     funcids=get_funcid_by_filepath(j,filepath,filetype,new_or_old)
     # _dict = get_all_pointer_assignment(j)
-    _dict = get_all_pointer(j,funcids)
-    f = open("pointer_points.pkl", 'wb')
-    pickle.dump(_dict, f, True)
-    f.close()
-    print ("pointer_def_points:",len(_dict)) #, _dict
+    if funcids==None:
+        _dict={}
+        f = open("pointer_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        f = open("array_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        f = open("api_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        f = open("integer_overflow_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        print('funcid is null')
+    else:
+        _dict = get_all_pointer(j,funcids)
+        f = open("pointer_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        print ("pointer_def_points:",len(_dict)) #, _dict
 
-    # _dict = get_all_array_assignment(j)
-    _dict = get_all_array(j,funcids)
-    f = open("array_points.pkl", 'wb')
-    pickle.dump(_dict, f, True)
-    f.close()
-    print ("array_def_points:",len(_dict))#, _dict
+        # _dict = get_all_array_assignment(j)
+        _dict = get_all_array(j,funcids)
+        f = open("array_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        print ("array_def_points:",len(_dict))#, _dict
 
-    _dict = get_all_sensitiveAPI(j,funcids)
-    f = open("api_points.pkl", 'wb')
-    pickle.dump(_dict, f, True)
-    f.close()
-    print ("api_points:",len(_dict))#, _dict
+        _dict = get_all_sensitiveAPI(j,funcids)
+        f = open("api_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        print ("api_points:",len(_dict))#, _dict
 
-    _dict = get_all_integeroverflow_point(j,funcids)
-    f = open("integer_overflow_points.pkl", 'wb')
-    pickle.dump(_dict, f, True)
-    f.close()
-    print ("integer_overflow_points:",len(_dict))#, _dict
+        _dict = get_all_integeroverflow_point(j,funcids)
+        f = open("integer_overflow_points.pkl", 'wb')
+        pickle.dump(_dict, f, True)
+        f.close()
+        print ("integer_overflow_points:",len(_dict))#, _dict
+

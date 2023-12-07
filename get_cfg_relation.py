@@ -74,7 +74,11 @@ def getCtrlRealtionOfCFG(cfg):
                 
                 start_node = cfg.vs[es.tuple[1]]              
                 not_scan_list = [if_node['name']]
-                list_falsestmt_nodes, temp = getSubCFGGraph(start_node, list_falsestmt_nodes, not_scan_list)
+                try:
+                    list_falsestmt_nodes, temp = getSubCFGGraph(start_node, list_falsestmt_nodes, not_scan_list)
+                except:
+                    continue
+                # list_falsestmt_nodes, temp = getSubCFGGraph(start_node, list_falsestmt_nodes, not_scan_list)
 
             else:
                 continue
@@ -276,65 +280,68 @@ def get_cfg_relation():
     len1=len(all_func_node)
     # print('all_func_node',all_func_node)
     for node in all_func_node:
-        print('\r',end='')
-        print('cfg:',i,'/',len1,' ',end='')
-        i+=1
-        funcfile=getFuncFile(j, node._id)
-        if i==2497:
-            print(funcfile)
-        testID = funcfile.split('/')[-2]
-        path = os.path.join("cfg_db", testID)
-        if not os.path.exists(path):
-            os.makedirs(path)
-        store_file_name = node.properties['name'] + '_' + str(node._id)
-        store_path = os.path.join(path, store_file_name)
-        if os.path.exists(store_path):
+        try:
+            print('\r',end='')
+            print('cfg:',i,'/',len1,' ',end='')
+            i+=1
+            funcfile=getFuncFile(j, node._id)
+            # if i==2497:
+            #     print(funcfile)
+            testID = funcfile.split('/')[-2]
+            path = os.path.join("cfg_db", testID)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            store_file_name = node.properties['name'] + '_' + str(node._id)
+            store_path = os.path.join(path, store_file_name)
+            if os.path.exists(store_path):
+                continue
+            # print store_path
+
+            initcfg = translateCFGByNode(j, node)   # get init CFG
+            opt_cfg_1 = modifyStmtNode(initcfg)
+            cfg = completeDataEdgeOfCFG(opt_cfg_1)
+            _dict = getCtrlRealtionOfCFG(cfg)
+            # print "----------------------------cfg--------------------------------------------------"
+            # for v in cfg.vs():
+            #     print v['name'],' : ',v['code'],v['type'],v['location']
+            # for e in cfg.es():
+            #     print cfg.vs[e.tuple[0]]['name'],' -----> ',cfg.vs[e.tuple[1]]['name']
+
+            _dict_node2ifstmt = {}
+            for key in _dict.keys():
+                _list = _dict[key][0] + _dict[key][1]
+                for v in _list:
+                    if v not in _dict_node2ifstmt.keys():
+                        _dict_node2ifstmt[v] = [key]
+
+                    else:
+                        _dict_node2ifstmt[v].append(key)
+
+            for key in _dict_node2ifstmt.keys():
+                _dict_node2ifstmt[key] = list(set(_dict_node2ifstmt[key]))
+
+            if not os.path.exists(store_path):
+                os.makedirs(store_path)
+            
+            filename = 'cfg'
+            cfg_store_path = os.path.join(store_path, filename)
+            fout = open(cfg_store_path, 'wb')
+            pickle.dump(cfg, fout, True)
+            fout.close()
+
+            filename = 'dict_if2cfgnode'
+            dict_store_path_1 = os.path.join(store_path, filename)
+            fout = open(dict_store_path_1, 'wb')
+            pickle.dump(_dict, fout, True)
+            fout.close()
+
+            filename = 'dict_cfgnode2if'
+            dict_store_path_2 = os.path.join(store_path, filename)
+            fout = open(dict_store_path_2, 'wb')
+            pickle.dump(_dict_node2ifstmt, fout, True)
+            fout.close()
+        except:
             continue
-        # print store_path
-
-        initcfg = translateCFGByNode(j, node)   # get init CFG
-        opt_cfg_1 = modifyStmtNode(initcfg)
-        cfg = completeDataEdgeOfCFG(opt_cfg_1)
-        _dict = getCtrlRealtionOfCFG(cfg)
-        # print "----------------------------cfg--------------------------------------------------"
-        # for v in cfg.vs():
-        #     print v['name'],' : ',v['code'],v['type'],v['location']
-        # for e in cfg.es():
-        #     print cfg.vs[e.tuple[0]]['name'],' -----> ',cfg.vs[e.tuple[1]]['name']
-
-        _dict_node2ifstmt = {}
-        for key in _dict.keys():
-            _list = _dict[key][0] + _dict[key][1]
-            for v in _list:
-                if v not in _dict_node2ifstmt.keys():
-                    _dict_node2ifstmt[v] = [key]
-
-                else:
-                    _dict_node2ifstmt[v].append(key)
-
-        for key in _dict_node2ifstmt.keys():
-            _dict_node2ifstmt[key] = list(set(_dict_node2ifstmt[key]))
-
-        if not os.path.exists(store_path):
-            os.makedirs(store_path)
-        
-        filename = 'cfg'
-        cfg_store_path = os.path.join(store_path, filename)
-        fout = open(cfg_store_path, 'wb')
-        pickle.dump(cfg, fout, True)
-        fout.close()
-
-        filename = 'dict_if2cfgnode'
-        dict_store_path_1 = os.path.join(store_path, filename)
-        fout = open(dict_store_path_1, 'wb')
-        pickle.dump(_dict, fout, True)
-        fout.close()
-
-        filename = 'dict_cfgnode2if'
-        dict_store_path_2 = os.path.join(store_path, filename)
-        fout = open(dict_store_path_2, 'wb')
-        pickle.dump(_dict_node2ifstmt, fout, True)
-        fout.close()
 
 if __name__ == "__main__":
     get_cfg_relation()

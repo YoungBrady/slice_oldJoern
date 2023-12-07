@@ -168,7 +168,10 @@ def getFuncNode(db, func_name):
 
 def getFuncFile(db, func_id):
     query_str = "g.v(%d).in('IS_FILE_OF').filepath" % func_id
-    ret = db.runGremlinQuery(query_str)
+    try:
+        ret = db.runGremlinQuery(query_str)
+    except Exception as e:
+        return False
     return ret[0]
 
 
@@ -429,7 +432,11 @@ def get_calls_id(db, func_name):
 def getCFGNodeByCallee(db, node_ast_id):
     #print "start"
     query_str = "g.v(%s).in('IS_AST_PARENT')" % node_ast_id
-    results = db.runGremlinQuery(query_str)
+    try:
+
+        results = db.runGremlinQuery(query_str)
+    except:
+        return None
     #print "end"
     if results == []:
         return None
@@ -538,7 +545,8 @@ def getClassByObjectAndFuncID(db, objectname, func_id):
             classname = False
             for node in results_2:
                 # print node.properties['location'].split(':')[0], location_row
-                if node.properties['location'].split(':')[0] == location_row:
+                
+                if node.properties['location']!=None and node.properties['location'].split(':')[0] == location_row:
                     classname = node.properties['code']
                     break
                 
@@ -799,7 +807,7 @@ def get_func_relation():
 
     pdg_db_path = "pdg_db"
     list_testID = os.listdir(pdg_db_path)
-    i=0
+    i=1
     len1=len(list_testID)
     for testID in list_testID:
         print('\r',end='')
@@ -840,6 +848,5 @@ def get_func_relation():
         f.close()
 
 if __name__ == "__main__":
-    print('')
     get_func_relation()
 

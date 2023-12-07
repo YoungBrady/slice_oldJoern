@@ -687,12 +687,11 @@ def type_slice(type,j,cnt):
     f.close()
     # cnt = 0
     hashList = []
-    
+    i=1
     for fileID in edit_points.keys():
         # print('\n')
         # slice_type = 0#api切片仅往上切
         len1=len(edit_points[fileID])
-        i=1
         testID = fileID.split('/')[-2]
         for func_info in edit_points[fileID]:
             print('\r',end='')

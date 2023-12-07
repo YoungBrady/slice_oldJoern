@@ -462,13 +462,16 @@ def get_pdg_relation():
     j = JoernSteps()
     j.connectToDatabase()
     all_func_node = getALLFuncNode(j)
-    k=0
+    k=1
     len1=len(all_func_node)
     for node in all_func_node:
         print('\r',end='')
         print('pdg:',k,'/',len1,' ',end='')
         k+=1
-        testID = getFuncFile(j, node._id).split('/')[-2]
+        funcfile=getFuncFile(j, node._id)
+        if funcfile==False:
+            continue
+        testID =funcfile.split('/')[-2]
         path = os.path.join("pdg_db", testID)
         if not os.path.exists(path):
             os.makedirs(path)
@@ -537,7 +540,10 @@ def get_pdg_relation():
 
         if not os.path.exists(path):
             os.makedirs(path)
-        f = open(store_path, 'wb')
+        try:
+            f = open(store_path, 'wb')
+        except:
+            continue
         pickle.dump(opted_pdg_5, f, True)
         f.close()
 

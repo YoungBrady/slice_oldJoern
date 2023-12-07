@@ -658,6 +658,8 @@ def process_cross_func(iter_times,current_time, testID, sub_graph,j):
                         param_node=sortedNodesByLoc(param_node)
                         startnodes=[FuncEntryNode]
                         for index in argindex:
+                            if index >=len(param_node):
+                                continue
                             startnodes.append(param_node[index])
                         sub_graph_for = program_slice_forward(pdg, startnodes)#从参数向下切片
 

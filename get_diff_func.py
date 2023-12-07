@@ -9,7 +9,7 @@ import pickle
 # args=sys.argv
 # filetype=args[1]
 
-def get_cfg_relation():
+def get_cfg_relation(cwe2file2linenum):
     j = JoernSteps()
     j.connectToDatabase()
     all_func_node = getALLFuncNode(j)
@@ -22,6 +22,7 @@ def get_cfg_relation():
         filename=filepath.split('/')[-1][-2]##去掉.c
         cwe=filepath.split('/')[-3]
         type=filepath.split('/')[-4]
+        
 # def get_diff_lines()       
 
 if __name__ == "__main__":
@@ -31,5 +32,5 @@ if __name__ == "__main__":
     f=open(difffile,'rb')
     cwe2file2linenum=pickle.load(f)
     f.close()
-    get_cfg_relation()
+    get_cfg_relation(cwe2file2linenum)
 
