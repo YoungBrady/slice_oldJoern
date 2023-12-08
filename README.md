@@ -1,4 +1,9 @@
 # slice_oldJoern
+
+## 准备源代码文件
+源代码文件按照cwe_dict.json分布，一个CWE对应一个文件夹，CWE文件夹内部还可以划分为0，1，2……方便并行处理，移动文件可以用shutil模块，
+上传文件可以直接往vscode中拖动即可
+
 ## 创建docker
 
 ```
