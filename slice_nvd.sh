@@ -7,29 +7,29 @@ source /etc/profile
 neo4j_path=/home/Joern/neo4j/bin
 joern_path=/home/Joern/joern-0.3.1
 # batch=$1
-slice_root=/home/sagpool/data2slice
-code_path=$slice_root/code
+slice_root=/home/sagpool/data2slice # 根据需要修改
+code_path=$slice_root/code # 根据需要修改
 cwe=CWE-$2
 
 data_path=$slice_root/NVD
-if [[ $1 == 's' ]];then
+if [[ $1 == 's' ]];then # 表示执行切片
 
   # for cwe in $(ls $data_path)
   # do
     # for cve in $(ls $data_path/$cwe/merge/$batch)
-  for type in {'old','new'}
+  for type in {'old','new'} # 根据需要修改
   do
-    for software in $(ls $data_path/$cwe/$type)
+    for software in $(ls $data_path/$cwe/$type) # 根据需要修改
     do
-      for cve in $(ls $data_path/$cwe/$type/$software)
+      for cve in $(ls $data_path/$cwe/$type/$software) # 根据需要修改
       do
       # if [[ $cve != 'ffmpegCVE-2013-7023' ]];then
       #   continue
       # fi
      
-          data_batch="$data_path/$cwe/$type/$software/$cve" # 源代码路径
+          data_batch="$data_path/$cwe/$type/$software/$cve" # 源代码路径 # 根据需要修改
           
-          batch_dir="$slice_root/slice_all/NVD/$cwe/$type/$software/$cve" # 存放切片结果
+          batch_dir="$slice_root/slice_all/NVD/$cwe/$type/$software/$cve" # 存放切片结果 # 根据需要修改
           echo $batch_dir
           output_path="$batch_dir/logs/output.txt"
           error_path="$batch_dir/logs/error.txt"
@@ -169,26 +169,26 @@ if [[ $1 == 's' ]];then
     done
   done
 
-else
+else # 表示计数，根据output.txt文件判断是否切片成功
 
-  # for cwe in $(ls $data_path)
+  # for cwe in $(ls $data_path) 
   # do
     # cwe=CWE-$2
   i=0
   j=0
-  for type in {'old','new'}
+  for type in {'old','new'} # 根据需要修改
   do
-    for software in $(ls $data_path/$cwe/$type)
+    for software in $(ls $data_path/$cwe/$type)  # 根据需要修改
     do
-      for cve in $(ls $data_path/$cwe/$type/$software)
+      for cve in $(ls $data_path/$cwe/$type/$software) # 根据需要修改
       do
       # if [[ $cve != 'binutilsCVE-2017-14129' ]];then
       #   continue
       # fi
 
-          data_batch="$data_path/$cwe/$type/$software/$cve/" # 源代码路径
+          data_batch="$data_path/$cwe/$type/$software/$cve/" # 源代码路径 # 根据需要修改
           
-          batch_dir="$slice_root/slice_all/NVD/$cwe/$type/$software/$cve/" # 存放切片结果
+          batch_dir="$slice_root/slice_all/NVD/$cwe/$type/$software/$cve/" # 存放切片结果 # 根据需要修改
           # echo $batch_dir
           output_path="$batch_dir/logs/output.txt"
           error_path="$batch_dir/logs/error.txt"
