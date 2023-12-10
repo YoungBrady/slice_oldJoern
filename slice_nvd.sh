@@ -8,10 +8,10 @@ neo4j_path=/home/Joern/neo4j/bin
 joern_path=/home/Joern/joern-0.3.1
 # batch=$1
 slice_root=/home/sagpool/data2slice # 根据需要修改
-code_path=$slice_root/code # 根据需要修改
+code_path=$slice_root/slice_oldJoern # 根据需要修改
 cwe=CWE-$2
 
-data_path=$slice_root/NVD
+data_path=$slice_root/juliet
 if [[ $1 == 's' ]];then # 表示执行切片
 
   # for cwe in $(ls $data_path)

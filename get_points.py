@@ -546,7 +546,7 @@ def get_funcid_by_filepath(db,filepath,filetype,old_or_new):
 
         func_ids=set()
         file2func=get_allFuncInfo(db,filetype)
-        f=open(pkl_path+'/%s_begin_dict.pkl'%cwe,'rb')
+        f=open(pkl_path+'/%s_begin_dict.pkl'%cwe,'rb')#记录漏洞行号的文件
         beginline_dict=pickle.load(f)
         f.close()
         for file in beginline_dict[old_or_new]:
