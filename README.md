@@ -34,21 +34,15 @@ tmux a
 for num in {0..9}
 do
     docker run -itd  --name sagpool_wh$num  -v  /home/wanghu/SAGPool:/home/sagpool sagpool:4.0 /bin/bash
-    # docker run -itd  --name sagpool_wh$num  -v  /home/wanghu/insertVul_test:/home/sagpool sagpool:4.0 /bin/bash
     tmux new -d -s wh_$num -n window0
-    # # tmux send -t wh_$num "docker exec sagpool_wh$num /bin/bash -c \"cd /home/sagpool/slice_oldJoern && ./slice_82.sh $num s\"" ENTER
-    # tmux send -t wh_$num "docker exec sagpool_wh$num /bin/bash -c \"cd /home/sagpool/slice_oldJoern \"" ENTER
-    # tmux kill-session -t wh_$num
-    # docker restart sagpool_wh$num
-    # docker rm sagpool_wh$num
-    # docker stop sagpool_wh$num
-# done
+    tmux send -t wh_$num "docker exec sagpool_wh$num /bin/bash -c \"cd /home/sagpool/slice_oldJoern && ./slice_82.sh $num s\"" ENTER
+done
 
-for num in {0..8}
+for num in {0..9}
 do
-    # tmux new -d -s wh_$num -n window0
-    tmux send -t wh_$num "docker exec sagpool_wh$num /bin/bash -c \"cd /home/sagpool/data2slice/code && ./slice_nvd.sh s $num\"" ENTER
-    # tmux kill-session -t wh_$num
-    # docker rm sagpool_wh$num
+
+    tmux kill-session -t wh_$num
+    docker stop sagpool_wh$num
+    docker rm sagpool_wh$num
 done
 ```
